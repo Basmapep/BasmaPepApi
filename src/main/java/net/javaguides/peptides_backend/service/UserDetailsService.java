@@ -9,4 +9,6 @@ public interface UserDetailsService {
 
     // Modify sendMail method to accept lists of base64 files and filenames
     String sendMail(String userId, List<String> base64Files, List<String> filenames, String messageContent);
+
+
 }
