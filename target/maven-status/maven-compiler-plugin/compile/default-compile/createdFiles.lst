@@ -1,0 +1,15 @@
+net\javaguides\peptides_backend\entity\UsersDetails.class
+net\javaguides\peptides_backend\service\UserDetailsServiceImpl.class
+net\javaguides\peptides_backend\dto\peptideDto.class
+net\javaguides\peptides_backend\controller\UserDetaisController.class
+net\javaguides\peptides_backend\repository\UserDetailsRepository.class
+net\javaguides\peptides_backend\service\UserDetailsService.class
+net\javaguides\peptides_backend\dto\UserDetailsBean.class
+net\javaguides\peptides_backend\controller\peptideController.class
+net\javaguides\peptides_backend\repository\PeptideRepository.class
+net\javaguides\peptides_backend\mapper\peptideMapper.class
+net\javaguides\peptides_backend\service\PeptideService.class
+BLASTSearch.class
+net\javaguides\peptides_backend\service\PeptideServiceImpl.class
+net\javaguides\peptides_backend\entity\peptide_1121_r1.class
+net\javaguides\peptides_backend\PeptidesBackendApplication.class
