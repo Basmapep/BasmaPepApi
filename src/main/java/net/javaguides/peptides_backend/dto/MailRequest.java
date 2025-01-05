@@ -34,4 +34,6 @@ public class MailRequest {
     public void setFilenames(String filenames) {
         this.filenames = filenames;
     }
+
+
 }
