@@ -61,28 +61,51 @@ public class PeptideServiceImpl implements PeptideService {
         }
 
         // Always wrap parameter in single quotes
-        String formattedParam = "'" + param.trim() + "'"; // Always wrap the parameter in quotes
+        String formattedParam = "'%" + param.trim() + "%'"; // Always wrap the parameter in quotes
 
         // Build the query based on the comparison operator
-        switch (comparison) {
-            case "greaterthan":
-                query.append(columnName).append("::Numeric > ").append(formattedParam);
-                break;
-            case "lesserthan":
-                query.append(columnName).append(" ::Numeric < ").append(formattedParam);
-                break;
-            case "equal":
-                query.append(columnName).append("  = ").append(formattedParam);
-                break;
-            case "greterthanequal":
-                query.append(columnName).append(" ::Numeric >= ").append(formattedParam);
-                break;
-            case "lesserthanequal":
-                query.append(columnName).append("::Numeric  <= ").append(formattedParam);
-                break;
-            default:
-                System.err.println("Invalid comparison operator: " + comparison);
-                return resultList; // Return empty list for invalid comparison
+        if (category.equals("Peptide sequence") || category.equals("Peptide modification")) {
+            switch (comparison) {
+                case "greaterthan":
+                    query.append(columnName).append("::Numeric > ").append(formattedParam);
+                    break;
+                case "lesserthan":
+                    query.append(columnName).append("::Numeric < ").append(formattedParam);
+                    break;
+                case "equal":
+                    query.append(columnName).append(" ilike ").append(formattedParam);
+                    break;
+                case "greaterthanequal":
+                    query.append(columnName).append("::Numeric >= ").append(formattedParam);
+                    break;
+                case "lesserthanequal":
+                    query.append(columnName).append("::Numeric <= ").append(formattedParam);
+                    break;
+                default:
+                    System.err.println("Invalid comparison operator: " + comparison);
+                    return resultList; // Return empty list for invalid comparison
+            }
+        } else {
+            switch (comparison) {
+                case "greaterthan":
+                    query.append(columnName).append("::Numeric > ").append(formattedParam);
+                    break;
+                case "lesserthan":
+                    query.append(columnName).append("::Numeric < ").append(formattedParam);
+                    break;
+                case "equal":
+                    query.append(columnName).append(" = ").append(formattedParam);
+                    break;
+                case "greaterthanequal":
+                    query.append(columnName).append("::Numeric >= ").append(formattedParam);
+                    break;
+                case "lesserthanequal":
+                    query.append(columnName).append("::Numeric <= ").append(formattedParam);
+                    break;
+                default:
+                    System.err.println("Invalid comparison operator: " + comparison);
+                    return resultList; // Return empty list for invalid comparison
+            }
         }
 
         // Print out the SQL query for debugging purposes
