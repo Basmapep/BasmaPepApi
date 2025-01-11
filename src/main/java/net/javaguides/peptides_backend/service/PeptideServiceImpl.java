@@ -61,10 +61,11 @@ public class PeptideServiceImpl implements PeptideService {
         }
 
         // Always wrap parameter in single quotes
-        String formattedParam = "'%" + param.trim() + "%'"; // Always wrap the parameter in quotes
+        String formattedParam = "'" + param.trim() + "'"; // Always wrap the parameter in quotes
 
         // Build the query based on the comparison operator
         if (category.equals("Peptide sequence") || category.equals("Peptide modification")) {
+             formattedParam = "'%" + param.trim() + "%'";
             switch (comparison) {
                 case "greaterthan":
                     query.append(columnName).append("::Numeric > ").append(formattedParam);
