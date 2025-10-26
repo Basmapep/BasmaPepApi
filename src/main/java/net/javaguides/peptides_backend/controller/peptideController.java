@@ -1,6 +1,9 @@
 package net.javaguides.peptides_backend.controller;
 
+import net.javaguides.peptides_backend.dto.MappingResponseDto;
 import net.javaguides.peptides_backend.dto.PeptideChartData;
+import net.javaguides.peptides_backend.dto.PeptideRequestDto;
+import net.javaguides.peptides_backend.service.PeptideMappingService;
 import net.javaguides.peptides_backend.service.PeptideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,9 @@ public class peptideController {
 
     @Autowired(required=true)
     PeptideService peptideService;
+
+    @Autowired
+    private PeptideMappingService peptideMappingService;
 
     @RequestMapping(value = "/searchPeptide", method = RequestMethod.GET)
     public List<Map<String, Object>> searchPeptide(@RequestParam(value = "category", required = true) String category,
@@ -50,6 +56,19 @@ public class peptideController {
     public Map<String, List<PeptideChartData>> bieChart(@RequestParam(value = "bieChart", required = true) String bieChart) {
         // Call the service layer to fetch the chart data, which now returns a Map
         return peptideService.bieChart(bieChart);
+    }
+
+
+    @PostMapping("/map")
+    public MappingResponseDto mapPeptide(@RequestBody PeptideRequestDto request) throws Exception {
+        // You can decide which field to process
+        if (request.getBase64() != null && !request.getBase64().isEmpty()) {
+            return peptideMappingService.processBase64Input(request.getBase64());
+        } else if (request.getSequence() != null && !request.getSequence().isEmpty()) {
+            return peptideMappingService.processSequence(request.getSequence());
+        } else {
+            throw new IllegalArgumentException("Either base64 or sequence must be provided");
+        }
     }
 
 }

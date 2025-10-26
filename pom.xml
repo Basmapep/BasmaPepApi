@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -8,7 +8,7 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>net.javaguides</groupId>
+	<groupId>net.javaguides</groupId> change and give
 	<artifactId>peptides-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>peptides-backend</name>
@@ -69,7 +69,44 @@
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.biojava</groupId>
+			<artifactId>biojava-core</artifactId>
+			<version>5.4.0</version>
+		</dependency>
+
+
+		<!-- OpenCSV for reading peptide CSV -->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.7.1</version>
+		</dependency>
+
+		<!-- Apache Commons CSV (optional, for easier CSV I/O) -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.10.0</version>
+		</dependency>
+
+		<!-- GFF parser -->
+<!--		<dependency>-->
+<!--			<groupId>uk.ac.ebi.pride</groupId>-->
+<!--			<artifactId>jmzml</artifactId>-->
+<!--			<version>1.7.11</version>-->
+<!--		</dependency>-->
+
+
+		<!-- Commons Lang for String utilities -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.14.0</version>
+		</dependency>
+
+
+
 
 	</dependencies>
 
