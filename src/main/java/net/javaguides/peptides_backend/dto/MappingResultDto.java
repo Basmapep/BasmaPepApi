@@ -15,6 +15,7 @@ public class MappingResultDto {
     private String strand;
     private int genomicStart;
     private int genomicEnd;
+    private String description;
 
     // getters & setters
 }

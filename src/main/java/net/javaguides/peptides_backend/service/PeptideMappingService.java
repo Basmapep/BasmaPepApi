@@ -50,8 +50,12 @@ public class PeptideMappingService {
                 String transcriptId = m.group(1);
                 String geneId = transcriptId.replace("t", "g");
                 String chrom = transcriptId.substring(0, 4);
+
+                // ✅ Extract description text after transcript ID
+                String description = header.replaceFirst(".*" + transcriptId + "\\s*", "").trim();
+
                 proteinInfoMap.put(transcriptId,
-                        new ProteinInfo(transcriptId, geneId, chrom, entry.getValue().getSequenceAsString()));
+                        new ProteinInfo(transcriptId, geneId, chrom, entry.getValue().getSequenceAsString(), description));
             }
         }
 
@@ -63,6 +67,7 @@ public class PeptideMappingService {
         for (String pep : peptides) {
             boolean found = false;
             for (ProteinInfo info : proteinInfoMap.values()) {
+
                 int idx = info.sequence.indexOf(pep);
                 if (idx != -1) {
                     found = true;
@@ -85,12 +90,16 @@ public class PeptideMappingService {
 
     private MappingResultDto createMappingDto(String pep, ProteinInfo info, GFFRecord g, int startAA, int endAA) {
         MappingResultDto dto = new MappingResultDto();
+        System.out.println("info>>>" + info.toString());
         dto.setPeptide(pep);
         dto.setTranscriptId(info.transcriptId);
         dto.setGeneId(info.geneId);
         dto.setChrom(info.chrom);
         dto.setPeptideStart(startAA);
         dto.setPeptideEnd(endAA);
+
+        // ✅ Include description in the response DTO
+        dto.setDescription(info.description);
 
         if (g != null) {
             dto.setGeneStart(g.start);
@@ -109,9 +118,20 @@ public class PeptideMappingService {
 
     // === Helper inner classes ===
     static class ProteinInfo {
-        String transcriptId, geneId, chrom, sequence;
-        ProteinInfo(String t, String g, String c, String s) {
-            transcriptId = t; geneId = g; chrom = c; sequence = s;
+        String transcriptId, geneId, chrom, sequence, description;
+        ProteinInfo(String t, String g, String c, String s, String d) {
+            transcriptId = t; geneId = g; chrom = c; sequence = s; description = d;
+        }
+
+        @Override
+        public String toString() {
+            return "ProteinInfo{" +
+                    "transcriptId='" + transcriptId + '\'' +
+                    ", geneId='" + geneId + '\'' +
+                    ", chrom='" + chrom + '\'' +
+                    ", description='" + description + '\'' +
+                    ", seqLen=" + (sequence != null ? sequence.length() : 0) +
+                    '}';
         }
     }
 
