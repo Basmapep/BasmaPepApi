@@ -90,7 +90,6 @@ public class PeptideMappingService {
 
     private MappingResultDto createMappingDto(String pep, ProteinInfo info, GFFRecord g, int startAA, int endAA) {
         MappingResultDto dto = new MappingResultDto();
-        System.out.println("info>>>" + info.toString());
         dto.setPeptide(pep);
         dto.setTranscriptId(info.transcriptId);
         dto.setGeneId(info.geneId);
